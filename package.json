@@ -1,0 +1,16 @@
+{
+  "name": "@nest/root",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "adam horesh",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "workspaces/*"
+    ]
+  },
+  "scripts": {
+  "start:frontend": "yarn workspace @nest/frontend start",
+  "start:backend": "yarn workspace @nest/backend start"
+}}
