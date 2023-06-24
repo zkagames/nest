@@ -17,11 +17,6 @@ export class RecipesController {
     return this.recipesService.findAll(user);
   }
 
-  @Get(':user/new')
-  findNew() {
-    return {name: '', stages: []}
-  }
-
   @Get(':user/:id')
   findOne(@Param('id') id: string) {
     return this.recipesService.findOne(id);

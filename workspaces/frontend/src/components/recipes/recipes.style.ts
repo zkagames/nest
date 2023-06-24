@@ -8,9 +8,10 @@ export const StageContainer = styled.div<{action: Action}>`
     svg {color: ${props=>COLORS[props.action]};}
 `
 
-export const DeleteConteiner = styled.div`
+export const ActionsConteiner = styled.div`
     display:flex;
     width: 100%;
     justify-content: center;
+    gap: 4px;
     svg{cursor:pointer}
 ` 

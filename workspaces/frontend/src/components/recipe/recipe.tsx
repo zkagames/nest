@@ -5,25 +5,24 @@ import { Alert, AlertColor, Button } from "@mui/material";
 import { FormContainer, FormRow } from "../form/form.style";
 import { Stage } from "../../types";
 import { useUserStore } from "../../contexts/user-store";
+import { Recipe as RecipeType} from '../../types';
 
-export const Recipe =({onCancel}:{onCancel:()=>void})=>{
+export const Recipe =({recipe, onCancel}:{recipe: RecipeType, onCancel:()=>void})=>{
     const  user  = useUserStore((state) => state.user);
 
-    const [name, setName] = useState('');
-
-    const {data: card} = useRecipe(user, 'new');
-    const {mutate: setRecipe} = useSetRecipe();
-
+    const [name, setName] = useState(recipe.name);
     const [stages, setStages] = useState<Array<Stage>>([]);
+
+    const {mutate: setRecipe} = useSetRecipe(!!recipe.id);
     const [updateStatus, setUpdateStatus] = useState<{status: AlertColor, text: string}>({
         status:'success',
         text: ''
     });
    
     useEffect(()=>{
-        setName(card?.name??'');
-        setStages(card?.stages??[]);
-    },[card]);
+        setName(recipe?.name??'');
+        setStages(recipe?.stages??[]);
+    },[recipe]);
 
     useEffect(()=>{
         setUpdateStatus({ 
@@ -36,13 +35,14 @@ export const Recipe =({onCancel}:{onCancel:()=>void})=>{
             status:'success',
             text:`Recipe updated`});
           
-        const recipe = {
+        const addRecipe = {
+            ...recipe,
             user,
             name,
             stages
         }
-        
-        setRecipe(recipe);
+
+        setRecipe(addRecipe);
         onCancel();
     },[name, stages]);
 
