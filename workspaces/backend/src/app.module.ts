@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {MongooseModule} from '@nestjs/mongoose'
-import { TodosModule } from './todos/todos.module';
+import { RecipesModule } from './recipes/recipes.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/admin'), 
-    TodosModule
+    RecipesModule
   ],
   controllers: [AppController],
   providers: [AppService],
